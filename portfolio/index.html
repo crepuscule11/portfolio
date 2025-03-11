@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Lynard Keir Bocado</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Nard</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-left">
+                <h1>Hi, I'm Lynard Keir Bocado</h1>
+                <p>A passionate programmer and system developer.</p>
+                <a href="#projects" class="btn">View My Work</a>
+            </div>
+            <div class="hero-right">
+                <img src="image/profile-no-bg.png" alt="Profile Image" class="profile-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am a software developer with experience in HTML, CSS, JavaScript, and frameworks like Flutter and Laravel. I love building functional and beautiful web and mobile applications.</p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skills-list">
+                <div class="skill" id="html">HTML</div>
+                <div class="skill" id="flutter">Flutter</div>
+                <div class="skill" id="laravel">Laravel</div>
+                <div class="skill" id="wordpress">WordPress</div>
+            </div>
+            <div class="skills-content" id="skillsContent">
+                <img src="image/mobile-login.png" alt="flutter" class="skill-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project">
+                <h3>Project 1</h3>
+                <p>A description of the project. Include the technologies you used.</p>
+            </div>
+            <div class="project">
+                <h3>Project 2</h3>
+                <p>A description of the project. Include the technologies you used.</p>
+            </div>
+            <div class="project">
+                <h3>Project 3</h3>
+                <p>A description of the project. Include the technologies you used.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Email: <a href="mailto:yourname@example.com">Lynardbocado@gmail.com</a></p>
+    </section>
+
+    <footer>
+        <p>© 2024 Lynard Keir Bocado. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      const skillImages = {
+    html: "image/html.png", // Image for HTML
+    flutter: "image/mobile-login.png", // Image for Flutter
+    laravel: "image/laravel.jfif", // Image for Laravel
+    wordpress: "image/wordpress.png" // Image for WordPress
+};
+
+// Get skill elements and content area
+const skills = document.querySelectorAll('.skill');
+const skillsContent = document.getElementById('skillsContent');
+
+// Set the default image for Flutter
+skillsContent.innerHTML = `<img src="${skillImages['flutter']}" alt="flutter" class="skill-image">`;
+
+// Add click event listeners to skills
+skills.forEach(skill => {
+    skill.addEventListener('click', function () {
+        // Remove active class from all skills
+        skills.forEach(s => s.classList.remove('active'));
+
+        // Add active class to the clicked skill
+        skill.classList.add('active');
+
+        // Display the corresponding image based on the clicked skill
+        const skillId = skill.id;
+        skillsContent.innerHTML = `<img src="${skillImages[skillId]}" alt="${skillId}" class="skill-image">`;
+    });
+});
+
+    </script>
+</body>
+</html>
