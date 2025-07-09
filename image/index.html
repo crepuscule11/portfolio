@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Lynard Keir Bocado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-text span {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: linear-gradient(45deg, #ffd700, #ffed4e);
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .skill {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .skill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-color: #ffd700;
+        }
+
+        .skills-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .skill-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .skill-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .skill-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Flutter Gallery Styles */
+        .flutter-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 100%;
+        }
+
+        .flutter-thumbnail {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .flutter-thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            margin-top: -10px;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        @media (max-width: 600px) {
+            .flutter-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+                max-width: 95%;
+            }
+        }
+
+        /* Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .project h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .project p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+        }
+
+        #contact p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        #contact a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        #contact a:hover {
+            color: #764ba2;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .social-icons {
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            line-height: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            section {
+                margin: 1rem;
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text, .hero-image {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-image {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">🚀 Developer X</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="hero-text">
+            <h1>Lynard, a <br> <span>Web Developer</span></h1>
+            <p>Software developer with experience in HTML, CSS, JavaScript, and frameworks like Flutter and Laravel. I love building functional and beautiful web and mobile applications</p>
+            <a href="#about" class="cta-button">Learn More →</a>
+        </div>
+        <div class="hero-image">
+            <img src="image/profile-no-bg.png" alt="Profile">
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto;">
+            I am a passionate software developer who specializes in creating innovative web and mobile solutions. With expertise in modern technologies and frameworks, I bring ideas to life through clean, efficient code and beautiful user experiences.
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skills-list">
+                <div class="skill active" id="html">HTML/CSS</div>
+                <div class="skill" id="flutter">Flutter</div>
+                <div class="skill" id="laravel">Laravel</div>
+                <div class="skill" id="wordpress">WordPress</div>
+            </div>
+            <div class="skills-content" id="skillsContent">
+                <img src="image/html.png" alt="HTML" class="skill-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project">
+                <h3>W Express</h3>
+                <p>Wide Wide World Express Corporation is a comprehensive shipping tracking website that enables users to monitor their orders in real-time. This project streamlines the logistics experience by providing customers with instant access to their shipment status and delivery updates. I developed this solution using WordPress Elementor for rapid deployment, combined with custom HTML and CSS for enhanced functionality and responsive design.</p>
+            </div>
+            <div class="project">
+                <h3>ITRC Website</h3>
+                <p>ITRC and FEATI Schools Inc is a full-featured educational platform that serves as a comprehensive portal for job applications and school enrollment, specifically focused on maritime and training courses. The website bridges the gap between career opportunities and educational advancement in the maritime industry. I built this platform using HTML and CSS, creating an intuitive user interface that simplifies the application process for both job seekers and prospective students.</p>
+            </div>
+            <div class="project">
+                <h3>Felamo</h3>
+                <p>Felamo is an innovative mobile application designed to enhance the learning experience through interactive quizzes and comprehensive score tracking. The app provides students with engaging educational content while automatically recording their performance data to a centralized website dashboard. I developed this cross-platform solution using API integration to ensure seamless data synchronization between the mobile app and web interface, creating a complete educational ecosystem for both students and educators.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Ready to work together? Let's create something amazing!</p>
+        <p>Email: <a href="mailto:Lynardbocado@gmail.com">Lynardbocado@gmail.com</a></p>
+    </section>
+
+    <footer>
+        <p>Follow Me:</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Lynard Keir Bocado. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const skillImages = {
+            html: "image/html.png",
+            flutter: [
+                "image/mobile-login.png",
+                "image/felamologin.jpg",
+                "image/felamodashboard.jpg",
+                "image/parangal.jpg"
+            ],
+            laravel: "image/laravel.jfif",
+            wordpress: "image/wexpress.jpg"
+        };
+
+        const skillLinks = {
+            wordpress: "https://www.wwwexpress.com.ph/"
+        };
+
+        // Get skill elements and content area
+        const skills = document.querySelectorAll('.skill');
+        const skillsContent = document.getElementById('skillsContent');
+
+        // Set the default content for HTML (first skill)
+        skillsContent.innerHTML = `<img src="${skillImages['html']}" alt="HTML" class="skill-image">`;
+
+        // Add click event listeners to skills
+        skills.forEach(skill => {
+            skill.addEventListener('click', function () {
+                // Remove active class from all skills
+                skills.forEach(s => s.classList.remove('active'));
+
+                // Add active class to the clicked skill
+                skill.classList.add('active');
+
+                // Display the corresponding content based on the clicked skill
+                const skillId = skill.id;
+                let content = '';
+                
+                if (skillId === 'flutter') {
+                    // Create gallery for Flutter
+                    content = `
+                        <div class="flutter-gallery">
+                            ${skillImages[skillId].map(img => `
+                                <img src="${img}" alt="Flutter Project" class="flutter-thumbnail" onclick="openModal('${img}')">
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    // Single image for other skills
+                    content = `<img src="${skillImages[skillId]}" alt="${skillId}" class="skill-image">`;
+                }
+                
+                // Add link if it exists for this skill
+                if (skillLinks[skillId]) {
+                    content += `<a href="${skillLinks[skillId]}" target="_blank" class="skill-link">Visit Website</a>`;
+                }
+                
+                skillsContent.innerHTML = content;
+            });
+        });
+
+        // Modal functionality
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImage.src = imageSrc;
+        }
+
+        // Close modal when clicking X
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('imageModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.getElementById('imageModal').style.display = 'none';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
